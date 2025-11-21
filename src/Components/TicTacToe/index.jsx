@@ -10,112 +10,83 @@ PlayerValue.set(2, 'X');
 const digonal1 = [[0,0], [1,1], [2,2]];
 const digonal2 = [[0,2], [1,1], [2,0]];
 
-const TicTacToe = () => {
-  const [board, setBoard] = useState(Array.from({ length: 3}, () => Array(3).fill(null)));
+const TicTacToe = ({ N = 5 }) => {
+ const [board, setBoard] = useState(
+    Array.from({ length: N }, () => Array(N).fill(""))
+  );
   const [turn, setTurn] = useState(1);
   const [winner, setWinner] = useState(null);
-  const [move, setMove] = useState(0);
   const [draw, setDraw] = useState(false);
-  const [winningCell, setWinningCell] = useState([]);
+
+  // Track counts for each player
+  const [rows, setRows] = useState(() => [Array(N).fill(0), Array(N).fill(0)]);
+  const [cols, setCols] = useState(() => [Array(N).fill(0), Array(N).fill(0)]);
+  const [diags, setDiags] = useState([0, 0]);     // main diag counts per player
+  const [antiDiags, setAntiDiags] = useState([0, 0]); // anti diag counts
 
   const onCellClick = (row, col) => {
-    const newBoard = [...board]
-    newBoard[row][col] = PlayerValue.get(turn);
+    if (board[row][col] || winner) return;
+
+    const newBoard = board.map((r, i) =>
+      r.map((c, j) => (i === row && j === col ? PlayerValue.get(turn) : c))
+    );
     setBoard(newBoard);
-    if (row+col === 2 || Math.abs(row-col) === 0) {
-      if (checkDigonals(row, col) || checkRow(row) || checkColumn(col)) {
-        setWinner(turn);
-      }
-    } else {
-      if (checkRow(row) || checkColumn(col)) {
+
+    const playerIdx = turn - 1;
+
+    console.log("player idx :", playerIdx, turn)
+
+    // update counters
+    const newRows = rows.map(r => [...r]);
+    const newCols = cols.map(c => [...c]);
+    const newDiags = [...diags];
+    const newAntiDiags = [...antiDiags];
+
+    console.log("newRows : ", newRows);
+    console.log("newCols : ", newCols);
+    console.log("newDiags : ", newDiags);
+    console.log("newAntiDiags : ", newAntiDiags);
+
+
+    newRows[playerIdx][row]++;
+    newCols[playerIdx][col]++;
+    if (row === col) newDiags[playerIdx]++;
+    if (row + col === N - 1) newAntiDiags[playerIdx]++;
+
+    setRows(newRows);
+    setCols(newCols);
+    setDiags(newDiags);
+    setAntiDiags(newAntiDiags);
+
+    // check win in O(1)
+    if (
+      newRows[playerIdx][row] === N ||
+      newCols[playerIdx][col] === N ||
+      newDiags[playerIdx] === N ||
+      newAntiDiags[playerIdx] === N
+    ) {
       setWinner(turn);
+    } else if (newBoard.flat().every(c => c !== "")) {
+      setDraw(true);
+    } else {
+      setTurn(turn === 1 ? 2 : 1);
     }
-    }
-    setTurn((prev) => prev === 1 ? 2 : 1);
-    setMove(prev => prev+1);
-  }
-
-  const isSafe = (row, col) => {
-    return row >= 0 && row < 3 && col >= 0 && col < 3;
-  }
-
-  const checkDrawStatus = () => {
-    for (let r = 0; r < 3; r++) {
-      for (let c = 0; c < 3; c++) {
-        if (board[r][c] === null) return;
-      }
-    }
-
-    setDraw(true);
-  }
-
-  useEffect(() => {
-    if (move === 9 && !winner) {
-      checkDrawStatus()
-    }
-  }, [move, winner])
-
-
-  const checkDigonals = (row, col) => {
-    let r = 0, c = 0;
-    let isMatched = true;
-    let cells = [];
-    while(r < 3 && c < 3) {
-      if (board[r][c] !== PlayerValue.get(turn)) {
-        isMatched = false;
-        break;
-      }
-      cells.push([r, c]);
-      r++;
-      c++;
-    }
-    if (isMatched) {
-      setWinningCell(cells.join(''));
-      return true;
-    }
-
-    r = 0;
-    c = 2;
-    cells = [];
-
-    while(r < 3 && c >= 0) {
-      if (board[r][c] !== PlayerValue.get(turn)) {
-        isMatched = false;
-        break;
-      }
-      r++;
-      c--;
-      cells.push([r, c].join(''));
-    }
-
-    if (isMatched) setWinningCell(cells);
-
-    return isMatched;
-  }
-
-  const checkRow = (row) => {
-    for(let col = 0; col < 3; col++) {
-      if (board[row][col] !== PlayerValue.get(turn)) return false;
-    }
-    return true;
-  }
-
-  const checkColumn = (col) => {
-    for(let row = 0; row < 3; row++) {
-      if (board[row][col] !== PlayerValue.get(turn)) return false;
-    }
-    return true;
-  }
+  };
 
   const reset = () => {
-    setBoard(Array.from({ length: 3}, () => Array(3).fill(null)));
+    setBoard(Array.from({ length: N }, () => Array(N).fill("")));
     setTurn(1);
     setWinner(null);
-  }
+    setDraw(false);
+    setRows([Array(N).fill(0), Array(N).fill(0)]);
+    setCols([Array(N).fill(0), Array(N).fill(0)]);
+    setDiags([0, 0]);
+    setAntiDiags([0, 0]);
+  };
 
   const renderBoard = () => {
     return (
-      <div className="board-container">
+      <div className="board-container" style={{ '--n': N }}>
         {
           board.map((row, rowIndex) =>
             row.map((col, colIndex) =>
@@ -125,7 +96,8 @@ const TicTacToe = () => {
               value={board[rowIndex][colIndex]}
               onCellClick={onCellClick}
               disabled={winner !== null}
-              isWinningCell={winningCell.includes(`${rowIndex}${colIndex}`)}
+              // isWinningCell={winningCell.includes(`${rowIndex}${colIndex}`)}
+              isWinningCell={false}
             />
           ))
         }
@@ -144,7 +116,7 @@ const TicTacToe = () => {
       {/* Game board and logic will go here */}
       {renderBoard()}
 
-      {draw && <div className="winner-info">Match id drawn!!</div>}
+      {draw && <div className="winner-info">Match draw!!</div>}
 
       {winner && <div className="winner-info">
         {`Player ${turn} won the game. Congratulations!!!`}

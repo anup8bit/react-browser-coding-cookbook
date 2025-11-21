@@ -7,21 +7,23 @@ import Modal from "../Modal";
 const GridPageLayout = ({
     children,
     menuList,
-    footerList
+    footerList,
+    navLinks,
 }) => {
     const [open, setOpen] = useState(false);
     const toggleModal = () => setOpen(!open);
+    const NavLinks = navLinks;
 
     return (
         <div className="container">
-            <div className="nav-bar"></div>
-            <div className="menu-bar"></div>
+            <div className="nav-bar">
+                
+            </div>
+            <div className="menu-bar">
+                <NavLinks />
+            </div>
             <div className="content-bar">
-                <div>{children}</div>
-                <StarRating totalStar={5} />
-                <TicTacToe />
-                <button onClick={toggleModal}>Open Modal</button>
-                <Modal toggleModal={toggleModal} open={open} />
+                {children}
             </div>
             <div className="footer-bar"></div>
         </div>

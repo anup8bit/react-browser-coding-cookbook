@@ -21,7 +21,7 @@
 
 .board-container {
     display: inline-grid;
-    grid-template-columns: auto auto auto;
+    grid-template-columns: repeat(var(--n), 1fr);
     border: solid 1px #000;
     gap: 0px;
 }

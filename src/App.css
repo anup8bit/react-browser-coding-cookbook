@@ -2,4 +2,6 @@
 .app-container {
   width: 100vw;
   height: 100vh;
+  margin: auto;
+  /* max-width: 1140px; */
 }

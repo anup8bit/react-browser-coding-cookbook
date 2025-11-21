@@ -1,5 +1,19 @@
 
+import { ChangeEvent, FormEvent, ReactElement } from "react";
 import "./input.css";
+
+interface InputProps {
+  className?: string;
+  id?: string;
+  onChange: (e: FormEvent<HTMLInputElement>) => void;
+  label?: string;
+  name: string;
+  placeholder?: string;
+  required?: boolean;
+  testId?: string;
+  type?: HTMLInputElement["type"],
+  value: string | number,
+}
 
 const Input = ({
   className,
@@ -12,7 +26,7 @@ const Input = ({
   testId,
   type = "text",
   value,
-}) => {
+}: InputProps): ReactElement | null => {
   const handleOnChange = () => {}
 
   return (
@@ -29,6 +43,7 @@ const Input = ({
           onChange={onChange}
           data-testId={testId}
           required={required}
+          aria-required={true}
         />
       </div>
     </div>
