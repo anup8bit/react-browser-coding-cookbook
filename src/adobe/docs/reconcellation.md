@@ -1,6 +1,14 @@
 ### Reconcilation ###
 
-✅ 1. Why Reconciliation Is Needed
+## 🚀 React Reconciliation — Deep Dive (Interview Ready) ##
+
+Reconciliation refers to how React figures out what has changed in the UI and updates the DOM efficiently.
+
+React never updates the DOM directly.
+It creates a Virtual DOM and then performs a diffing process using reconciliation.
+
+
+## ✅ 1. Why Reconciliation Is Needed
 
 Updating the browser DOM is expensive.
 
@@ -12,7 +20,7 @@ This diffing + updating process is called:
 ⭐ Reconciliation = Virtual DOM diffing + applying minimal DOM mutations
 
 
-✅ 2. Two Core Principles of React Reconciliation
+## ✅ 2. Two Core Principles of React Reconciliation
 
 React uses two assumptions to optimize comparisons:
 
@@ -20,15 +28,16 @@ A. Different Types → Completely Replace
 
 If element.type changes, React throws away the old tree.
 
+```jsx
 <div> → <span>
-
+```
 
 React unmounts <div> and mounts <span> — no reuse.
 
 Even component types:
-
+ ```jsx
 <MyComponent /> → <OtherComponent />
-
+```
 
 React unmounts old component, mounts new one.
 
@@ -36,8 +45,9 @@ B. Same Type → Reuse Node & Update In-Place
 
 If type is same:
 
+```jsx
 <div className="red"> → <div className="blue">
-
+```
 
 React updates only changed attributes.
 
@@ -46,8 +56,9 @@ React updates only changed attributes.
 
 If component identity stays same:
 
+```jsx
 <MyComponent a={1} /> → <MyComponent a={2} />
-
+```
 
 React does NOT recreate the component,
 it re-renders it with new props.
@@ -71,10 +82,11 @@ React matches correct elements
 
 Example:
 
+```jsx
 <ul>
   {items.map(i => <li key={i.id}>{i.name}</li>)}
 </ul>
-
+```
 
 If items reorder, React reuses nodes correctly.
 
