@@ -7,7 +7,7 @@ interface Error {
   status: number;
 }
 
-export const useFetchData = (url: string, headers: Record<string, any>) => {
+export const useFetchData = (url: string, headers?: Record<string, any>) => {
     const [data, setData] = useState<ResponseData>(null);
     const [error, setError] = useState<Error | null>(null);
     const [loading, setLoading] = useState(false);

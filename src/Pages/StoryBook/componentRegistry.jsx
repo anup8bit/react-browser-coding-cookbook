@@ -7,6 +7,7 @@ import ProgressBar from "../../Components/ProgressBar";
 import StarRating from "../../Components/StarRating";
 import TicTacToe from "../../Components/TicTacToe";
 import Tooltip from "../../WebAPIS/DOMWebAPI/Tooltip/TooltipExample";
+import UserListWithSuspense from "../../react-api-components/MySuspense";
 
 const componentsMap = {
     Input,
@@ -18,6 +19,7 @@ const componentsMap = {
     AutoComplete,
     ProgressBar,
     Tooltip,
+    UserListWithSuspense,
 }
 
 export default componentsMap;

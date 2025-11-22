@@ -18,6 +18,8 @@ import ProductList from './WebAPIS/SystemDesign/ProductList'
 import DebounceSearch from './InterviewMocks/Mock2/browser-coding/components/DebounceSearch'
 import MockComponents from './InterviewMocks'
 import InfiniteScroll from './InterviewMocks/Mock4/Components/InfiniteScroll'
+import DebouncedSearch from './adobe/components/DebouncedSearch'
+import ThrottledInfiniteScroll from './adobe/components/ThrottledInfiniteScroll'
 
 
 function App() {
@@ -41,6 +43,10 @@ function App() {
           <Route path="/mock/2" element={<DebounceSearch /> } />
           <Route path="/mock" element={<MockComponents />} />
           <Route path="/github-users" element={<InfiniteScroll />} />
+
+          <Route path="/adobe/debounce/search" element={<DebouncedSearch />} />
+          <Route path="/adobe/throttle/infinite-scroll" element={<ThrottledInfiniteScroll />} />
+
 
         </Routes>
       </div>

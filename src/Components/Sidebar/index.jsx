@@ -42,6 +42,10 @@ const list = [
     label: "Tooltip",
     name: "Tooltip",
   },
+  {
+    label: "User List With Suspense",
+    name: "UserListWithSuspense",
+  },
 ]
 
 const Sidebar = ({

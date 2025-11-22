@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, ReactNode, ReactElement } from "react";
 import StarRating from "../StarRating";
 import TicTacToe from "../TicTacToe";
 import "./index.css";
@@ -20,7 +20,7 @@ const GridPageLayout = ({
                 
             </div>
             <div className="menu-bar">
-                <NavLinks />
+                {NavLinks && <NavLinks />}
             </div>
             <div className="content-bar">
                 {children}
