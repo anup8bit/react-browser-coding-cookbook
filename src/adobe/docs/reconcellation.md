@@ -2,7 +2,7 @@
 
 ## 🚀 React Reconciliation — Deep Dive (Interview Ready) ##
 
-Reconciliation refers to how React figures out what has changed in the UI and updates the DOM efficiently.
+Reconciliation is the process in which React figures out what has changed in the UI and updates the DOM efficiently.
 
 React never updates the DOM directly.
 It creates a Virtual DOM and then performs a diffing process using reconciliation.
