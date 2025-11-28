@@ -45,3 +45,33 @@ button:focus-visible {
   border: solid 1px grey;
   border-radius: 4px;
 }
+
+table {
+  box-sizing: border-box;
+  overflow: auto;
+  height: 100%;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead {
+  background-color: #7a33de;
+  padding: 12px;
+}
+
+tr {
+  transition: transform 0.5s;
+}
+
+tr:hover {
+  transform: scale(1.01);
+  cursor: pointer;
+}
+
+tr:nth-child(even) {
+  background-color: #e9e4f0;
+}
+
+td {
+  padding: 8px;
+}

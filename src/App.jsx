@@ -20,6 +20,11 @@ import MockComponents from './InterviewMocks'
 import InfiniteScroll from './InterviewMocks/Mock4/Components/InfiniteScroll'
 import DebouncedSearch from './adobe/components/DebouncedSearch'
 import ThrottledInfiniteScroll from './adobe/components/ThrottledInfiniteScroll'
+import TableSearch from './adobe/components/Table/TableSearch'
+import GridLayout from './adobe/layouts/GridLayout'
+import TicTacToeGame from './adobe/system-design/TicTacToe/TicTacToe'
+import NewsFeed from './adobe/system-design/NewsFeed'
+import SystemDesign from './adobe/system-design'
 
 
 function App() {
@@ -28,6 +33,7 @@ function App() {
   return (
     <Router>
       <div className='app-container'>
+      {/* <div> */}
         <Routes>
           <Route path="/login" element={<LoginPage />} />
           <Route path="/" element={<GridPageLayout />} />
@@ -37,7 +43,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/responsive" element={<ResponsiveLayout />} />
           <Route path="/game" element={<Game />} />
-          <Route path="image-gallery" element={<ImageGallery />} />
+          <Route path="/image-gallery" element={<ImageGallery />} />
           <Route path="/mock/tag" element={<InputTag /> } />
           <Route path="/products" element={<ProductList /> } />
           <Route path="/mock/2" element={<DebounceSearch /> } />
@@ -46,7 +52,11 @@ function App() {
 
           <Route path="/adobe/debounce/search" element={<DebouncedSearch />} />
           <Route path="/adobe/throttle/infinite-scroll" element={<ThrottledInfiniteScroll />} />
-
+          <Route path="/adobe/debounce/table/search" element={<TableSearch />} />
+          <Route path="/adobe/grid" element={<GridLayout />} />
+          <Route path="/adobe/game" element={<TicTacToeGame />} />
+          <Route path="/adobe/newsfeed" element={<NewsFeed />} />
+          <Route path="/adobe/system-design" element={<SystemDesign />} />
 
         </Routes>
       </div>
