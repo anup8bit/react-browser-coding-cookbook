@@ -142,7 +142,7 @@ This frame’s callback is running now
 
 Browser is about to repaint after this callback
 
-<span style="background: #fffb99;">
+<strong>
 🔍 Where does it come from?
 
 Every time you do:
@@ -182,7 +182,7 @@ This is how you create time-based animations instead of frame-based animations.
 
 Time-based = smoother & consistent for all devices
 Frame-based = choppy on slow machines, too fast on fast machines
-</span>
+</strong>
 
 🧠 Let’s walk through your code with meaning
 1. Animation starts
