@@ -5,6 +5,9 @@ export interface AccordianProps {
   content: ReactNode;
   key?: string;
   id?: string;
+  active?: boolean;
+  isMultiOpen?: boolean;
+  setActiveIndex?: () => void;
 }
 
 export interface HeaderProps {
@@ -12,9 +15,11 @@ export interface HeaderProps {
   open: boolean;
   toggle: () => void;
   ariaControl?: string | undefined;
+  setActiveIndex?: () => void;
 }
 
-export interface AccordianBodyProps {
+export interface AccordianPanelProps {
   content: ReactNode;
+  open: boolean;
 }
 

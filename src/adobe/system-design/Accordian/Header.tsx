@@ -1,12 +1,26 @@
 import { HeaderProps } from "./type";
 
-const Header = ({ ariaControl, title, open, toggle }: HeaderProps) => {
+const Header = ({ ariaControl, title, open, toggle, setActiveIndex }: HeaderProps) => {
+  const handleClick = () => {
+    toggle();
+
+    if (setActiveIndex) {
+      setActiveIndex();
+    }
+  }
   return (
-    <button role="heading" aria-control={ariaControl} aria-expanded={open} className="accordian-header" onClick={toggle}>
-      <h3>{title}</h3>
-      <div className={open ? "arrow-up" : "arrow-down"}></div>
-    </button>
-  )
+    <header className="accordian-header-wrapper">
+      <button
+        aria-controls={ariaControl}
+        aria-expanded={open}
+        className="accordian-header"
+        onClick={handleClick}
+      >
+        <span>{title}</span>
+        <span className={open ? "arrow-up" : "arrow-down"} aria-hidden="true" />
+      </button>
+    </header>
+  );
 }
 
 export default Header;
