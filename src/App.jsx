@@ -25,6 +25,13 @@ import GridLayout from './adobe/layouts/GridLayout'
 import TicTacToeGame from './adobe/system-design/TicTacToe/TicTacToe'
 import NewsFeed from './adobe/system-design/NewsFeed'
 import SystemDesign from './adobe/system-design'
+import PairGame from './adobe/system-design/PairsGame'
+import ProgressBar from './adobe/system-design/Progressbar'
+import Carousel from './adobe/system-design/Carousel'
+import { slidesData } from './adobe/system-design/Carousel/utils'
+import AnalyticsDashboardPage from './adobe/system-design/AnalyticsDashboard/AnalyticsDashboardPage'
+import DragDropPage from "./adobe/system-design/DragDrop";
+import FileUplaod from './adobe/system-design/FileUpload/FileUpload'
 
 
 function App() {
@@ -57,6 +64,12 @@ function App() {
           <Route path="/adobe/game" element={<TicTacToeGame />} />
           <Route path="/adobe/newsfeed" element={<NewsFeed />} />
           <Route path="/adobe/system-design" element={<SystemDesign />} />
+          <Route path="/adobe/progressbar" element={<ProgressBar progress={70} />} />
+          <Route path="/adobe/pair-game" element={<PairGame n={5} cards={[1,5,8,4,2,2,3,4,2,3,0,7,9,5,3,2,6,4,8,7,0,6,9,1,3]} />} />
+          <Route path="/adobe/carousel" element={<Carousel slides={slidesData} startIndex={0} />} />
+          <Route path="/adobe/analytics/dashboard" element={<AnalyticsDashboardPage />} />
+          <Route path="/adobe/drapdrop" element={<DragDropPage />} />
+          <Route path="/adobe/file-upload" element={<FileUplaod />} />
 
         </Routes>
       </div>
